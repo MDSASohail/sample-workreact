@@ -83,7 +83,7 @@ function App() {
               <label htmlFor="email">
                 <img src={emailIcon} alt="" className="w-6 h-6" />
               </label>
-              <input value={userData.email} onChange={handleChange} className="ml-2 bg-transparent outline-none font-semibold" name="email" id="email" type="email" placeholder="Email ID " />
+              <input value={userData.email} onChange={handleChange} className="ml-2 w-72 bg-transparent outline-none font-semibold" name="email" id="email" type="email" placeholder="Email ID " />
             </div>
             <div className="bg-white flex  mb-6  rounded-3xl overflow-hidden px-4 py-2">
               <label htmlFor="password">
@@ -91,11 +91,11 @@ function App() {
                   <path fillRule="evenodd" d="M8 10V7a4 4 0 1 1 8 0v3h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1Zm2-3a2 2 0 1 1 4 0v3h-4V7Zm2 6a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0v-3a1 1 0 0 1 1-1Z" clipRule="evenodd" />
                 </svg>
               </label>
-              <input value={userData.password} onChange={handleChange} id="password" name="password" className="ml-2 bg-transparent outline-none font-semibold" type="password" placeholder="Create a Password " />
+              <input value={userData.password} onChange={handleChange} id="password" name="password" className="ml-2 w-72 bg-transparent outline-none font-semibold" type="password" placeholder="Create a Password " />
             </div>
             <div className="bg-white flex  mb-6  rounded-3xl overflow-hidden px-4 py-2">
 
-              <input value={userData.againPassword} onChange={handleChange} className="ml-2 outline-none bg-transparent font-semibold" type={show ? "password" : "text"} name="againPassword" placeholder="Confirm Password " />
+              <input value={userData.againPassword} onChange={handleChange} className="ml-2 w-72 outline-none bg-transparent font-semibold" type={show ? "password" : "text"} name="againPassword" placeholder="Confirm Password " />
               {!show && <img onClick={() => { setShow(!show) }} src={eyeIcon} alt="" className="w-6 h-6" />}
               {show && <img onClick={() => { setShow(!show) }} src={eyeCloseIcon} alt="" className="w-6 h-6" />}
             </div>
