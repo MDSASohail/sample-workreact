@@ -29,6 +29,11 @@ function App() {
         return;
       }
     }
+    if(userData.password.length<6)
+      {
+        alert("Passward must greater than 6 characters");
+        return;
+      }
     if (userData.password !== userData.againPassword) {
       alert("Password must be same");
       return;
