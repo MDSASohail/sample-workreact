@@ -66,13 +66,13 @@ function App() {
         <form onSubmit={handleSubmit}>
           <div className="innerDiv my-0 py-10 px-32  rounded-3xl">
             <h1 className="text-2xl  text-center  mb-8 font-extrabold">Signup</h1>
-            <div className="bg-white flex mb-6  rounded-3xl overflow-hidden px-4 py-2">
+            <div className="bg-white  flex mb-6  rounded-3xl overflow-hidden px-4 py-2">
               <label htmlFor="name">
                 <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                   <path fillRule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clipRule="evenodd" />
                 </svg>
               </label>
-              <input value={userData.fullName} onChange={handleChange} className="ml-2 bg-transparent outline-none  font-semibold" id="name" name="fullName" type="text" placeholder="Full Name " />
+              <input value={userData.fullName} onChange={handleChange} className="ml-2 w-72 bg-transparent outline-none  font-semibold" id="name" name="fullName" type="text" placeholder="Full Name " />
             </div>
             <div className="bg-white flex  mb-6  rounded-3xl overflow-hidden px-4 py-2">
               <label htmlFor="email">
