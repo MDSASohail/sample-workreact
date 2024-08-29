@@ -1,9 +1,235 @@
-.innerDiv
-{
-  background-color: rgba(39, 41, 30, 0.14);
+/* Universal Selector */
+html {
+  font-size: 16px;
 }
 
-.signBTN
-{
-   background-color: rgba(0, 120, 212, 1);
+body {
+  margin: 0px;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+/* All */
+.backgroundLight {
+  background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+/* ---------------------- */
+
+
+/* Home Page */
+.linearGradiant {
+  background: linear-gradient(to bottom, #FFF6E5, white);
+  height: 100%;
+  /* border: 2px solid green; */
+}
+
+.allTransections {
+  height: 90vh;
+  border: 2px solid red;
+}
+
+.filterOptions {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ___________ */
+
+
+
+
+
+
+@media (max-width:700px) {
+
+  /* For First Page */
+  .mainDiv {
+    display: block;
+    height: 100vh;
+
+
+  }
+
+  .mainDiv img {
+    height: 40vh;
+  }
+
+  .contentDiv {
+
+    height: 27vh;
+
+  }
+
+  .contentDiv h1 {
+    font-size: 45px;
+  }
+
+  /* __________________ */
+
+  /* For Sigh Up */
+  .hideShow {
+    display: block;
+  }
+
+  /* _____________________ */
+
+  /* Expense Component */
+  .expenseCom {
+    display: block;
+
+  }
+
+  .innerDiv {
+    width: 100%;
+  }
+
+  .innerDiv .redDiv {
+    height: 40vh;
+  }
+
+  .innerDiv .whiteDiv {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  /* ___________________________ */
+
+
+  /* Home Page */
+  .homeFlex {
+    flex-direction: column-reverse;
+
+  }
+
+  .sideItems {
+    border: 3px solid red;
+    flex: 1;
+    flex-direction: row;
+
+
+  }
+
+  .sideItems div {
+    border: 2px solid blue;
+    /* width: 50px; */
+  }
+
+  .sideItems svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .text-div {
+    /* flex-grow: 1; */
+    background-color: red;
+    /* flex-shrink: 1; */
+  }
+
+  .allData {
+    border: 3px solid blue;
+    height: 100px;
+    flex: 9;
+  }
+
+  .totalMainDiv {
+    background: linear-gradient(to bottom, #FFF6E5, white);
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    height: 99vh;
+    transition: transform 0.4s;
+
+  }
+
+  .transformHide {
+    transform: translateX(-100%);
+  }
+
+  .transformDisplay {
+    transform: translateX(0%);
+  }
+
+  .allExpenseDiv {
+    display: block;
+  }
+
+  .allTransections {
+    height: 78vh;
+  }
+
+  .showHide {
+    display: inline;
+  }
+
+
+
+  /* _______________________ */
+
+
+  /* Monthly Transection Component */
+  .transectionDetail {
+    flex-direction: column;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    overflow-x: hidden;
+  }
+
+  .monthlyTransectionEachExpense {
+    flex-direction: column;
+
+  }
+
+  .totalDivMT {
+    flex-direction: column;
+  }
+
+  /* _____________ */
+
+
+
+
+   /* Add Expense */
+
+   .addExpense
+   {
+      display: block;
+      height: calc(100vh - 28px)
+   }
+   .mainDiv
+   {
+      width: 100%;
+      height: 100%;
+
+   }
+
+   /* --------------------- */
+
+
+/* AllItemsAndFilters */
+.listFlex
+{
+   flex-direction: column;
+}
+
+.allTransections
+{
+   height: 70vh;
+}
+
+/* ------------- */
+
+
+
+
+
+
+}
+
+@media screen and (min-width:700px) {}
+
+/* ________________________ */
