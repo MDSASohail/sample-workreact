@@ -7,18 +7,30 @@ import { setLengthOfFilteredData ,setPageNo} from '../Store/ExternalSlice'
 function ListOfExpenses() {
   // const date=new Date();
   // console.log(date.toLocaleTimeString())
-  const { pageNo, allExpences } = useSelector(state => state.externalData);
+  const { pageNo,allExpencesToSHow : allExpences } = useSelector(state => state.externalData);
   console.log("AllExpenses from store",allExpences)
   // const [filteredData,setFilteredData]=useState(null);
   const { ext, shortBy, category } = useSelector(state => state.internalData);
   const dispatch = useDispatch();
   const filteredData = useMemo(() => {
     let data = allExpences.slice();
+    //Filter the list by category
     if (category && category!=="All") {
-      console.log("Category", category)
-      data = data.filter(item => item.category === category);
+      
+      data = data.filter(item => item.category[0] === category || item.category[1] === category);
     }
-    
+
+    //Filter by Expense and Income.
+    if(ext==="Expense")
+    {
+       data=data.filter(item=>item.category[0].trim()==="Expense");
+    }
+    else if(ext==="Income")
+    {
+       data=data.filter(item=>item.category[0].trim()==="Income");
+    }
+
+    //Filter data by lowest, Highest, Newest, and oldest.
     if (shortBy) {
       if (shortBy === "Lowest") {
         data = data.sort((a, b) => a.amount - b.amount);
@@ -40,13 +52,13 @@ function ListOfExpenses() {
     }
 
     
-    console.log("Filter ",data)
+    // console.log("Filter ",data)
     dispatch(setLengthOfFilteredData(data.length));
     dispatch(setPageNo(0));
     return data;
   }, [ext, shortBy, category, allExpences]);
 
-  console.log("Filtered Data ",filteredData)
+  // console.log("Filtered Data in ListOfExpense",filteredData)
   return (
     <div>
 
@@ -55,11 +67,11 @@ function ListOfExpenses() {
           <img src={IMG} alt="" />
         </div>
         <div className='flex-[6]'>
-          <h1 className='font-bold'>{item.category}</h1>
+          <h1 className='font-bold'>{item.category[1]||item.category[0]}</h1>
           <p className='text-sm text-light20'>{item.description}</p>
         </div>
         <div className='flex-[2]'>
-          <h3 className={`font-medium ${item.category === "Income" ? 'text-green100' : "text-red100"}`}>{item.category === "Income" ? '+ ' + item.amount : '- ' + item.amount}</h3>
+          <h3 className={`font-medium ${item.category[0] === "Income" ? 'text-green100' : "text-red100"}`}>{item.category[0] === "Income" ? '+ ' + item.amount : '- ' + item.amount}</h3>
           <h3 className='text-light20'>{format(item.createdAt)}</h3>
         </div>
       </li>)}

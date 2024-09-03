@@ -1,42 +1,62 @@
-import React, { useRef } from 'react'
-import { setAllExpences } from '../Store/ExternalSlice'
+import { useRef, useState } from 'react'
+import { setAllExpences ,setTotal,setSingleExpense} from '../Store/ExternalSlice'
 import { setAddExpense } from '../Store/InternalSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import {data} from '../Data'
 import axios from 'axios';
-function AddExpense({ bg }) {
+function AddExpense({ type,setType}) {
   const dispatch = useDispatch();
-  const { user } = useSelector(state => state.externalData);
+  const { user,total } = useSelector(state => state.externalData);
   const amount = useRef();
   const category = useRef();
   const description = useRef();
+  //TO handle change in Type of expense
+  const handleType=(e)=>{
+    
+    // const value=e.target.value.split(',');
+    // console.log(value)
+    setType(e.target.value)
+    // console.log(e.target.value)
+  }
+  //To handle submit
   const handleSumbit = async (e) => {
+    const c=type.split('|');
     e.preventDefault();
-    if (amount.current.value === "" || category.current.value === "" || description.current.value === "") {
+    if (amount.current.value === "" || c[0]==="Expense"?category.current.value === "":false || description.current.value === "") {
       alert("All fields are mondatory");
       return;
     }
-    // Change time to mongoDB.
-    const expense = { userId: user._id, description: description.current.value, amount: amount.current.value, category: category.current.value };
+    
+    // console.log("Category is ",category)
+    //Deciding what to update on total,
+    // let whatToUpdate=null;
+    // total.forEach(item=>{
+    //     if(item.text===c[0].trim())
+    //     {
+    //       whatToUpdate={text:item.text,amount: Number(item.amount) + Number(amount.current.value)}
+    //     }
+        
+    //   })
+      // console.log("Total update",whatToUpdate)
+
+    
+    const expense = { userId: user._id, description: description.current.value, amount: amount.current.value, category: [c[0].trim(),c[0].trim()==="Expense"?category.current.value:null] };
     // dispatch(setAllExpences(expense));
     //Saving data on database.
     try {
       const savedData = await axios.post('http://localhost:8000/expense/save', { expense });
-      try {
-        const fetchExpenses=async()=>{
-          const allExpenses=await axios.post('http://localhost:8000/expense/allExpense',{userId:user._id});
-          console.log("All Expenses are",allExpenses.data);
-          dispatch(setAllExpences(allExpenses.data));
-        }
-        fetchExpenses();
-    } catch (error) {
-      console.log("Error in fetching Expenses");
-    }
+      console.log("Saved expensed",savedData.data)
+      //Updating only the latest expense and total in the store
+      dispatch(setSingleExpense(savedData.data.savedExpense));
+      // dispatch(setTotal(savedData.data.updateTotal))
+
+
       amount.current.value = "";
       category.current.value = "";
       description.current.value = "";
       
     } catch (error) {
-      console.log("Error in saving Expense");
+      console.log("Error in saving Expense",error.message);
     }
     // console.log(expense);
 
@@ -44,11 +64,15 @@ function AddExpense({ bg }) {
   return (
     <div className='w-full filterOptions    addExpense  absolute top-0  h-full  flex justify-center items-center'>
       <form action="" onSubmit={handleSumbit}>
-        <div className={`mainDiv rounded-lg ${bg}`}>
+        <div className={`mainDiv rounded-lg ${type}`}>
           <div className=' text-white h-1/2 p-4'>
             <div className='relative'>
               <span onClick={() => dispatch(setAddExpense(false))} className='absolute top-2 cursor-pointer'>⬅️</span>
-              <p className='text-center text-2xl'>Expense</p>
+              <p className='text-center text-2xl'>
+                <select value={type} onChange={handleType} name="" id="" className='outline-none bg-transparent'>
+                  {data.map(item=><option value={`${item.text} | ${item.bg}`} className={`${item.bg}`} key={item.text}>{item.text}</option>)}
+                </select>
+              </p>
             </div>
             <div className='mt-20'>
               <p>How much?</p>
@@ -56,14 +80,12 @@ function AddExpense({ bg }) {
             </div>
           </div>
           <div className='bg-white flex flex-col justify-center  h-1/2 rounded-t-3xl   px-3 pt-4 '>
-            {bg === "bg-red100" && <div className='w-full' >
+           {type.includes("Expense") && <div className='w-full' >
               <select name="" id="" ref={category} className='w-full py-2 outline-none'>
-                <option value="shopping">Shopping</option>
+                <option value="Shopping">Shopping</option>
                 <option value="Travel">Travel</option>
-                <option value="shopping">Shopping</option>
-                <option value="Travel">Travel</option>
-                <option value="shopping">Shopping</option>
-                <option value="Travel">Travel</option>
+                <option value="Food">Food</option>
+                
               </select>
             </div>}
             <div className='w-full py-2'>

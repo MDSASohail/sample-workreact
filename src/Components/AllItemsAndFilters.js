@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {useSelector,useDispatch} from 'react-redux'
 import ListOfExpenses from './ListOfExpenses'
 import {setFilterShow,setShowHide,setAddExpense} from '../Store/InternalSlice'
@@ -7,10 +8,12 @@ import AddExpense from './AddExpense';
 function AllItemsAndFilters() {
     const dispatch=useDispatch();
     const {filterShow,addExpense}  =useSelector(state=>state.internalData);
+    //Data for addExpense Component
+    const [type,setType]=useState('Expense | bg-red100')
     return (
         <div className='border-2 border-purple-900 relative '>
             {filterShow && <FilterOptions/>}
-            {addExpense && <AddExpense bg={"bg-red100"}/>}
+            {addExpense && <AddExpense type={type} setType={setType}/>}
             <div className='flex listFlex  justify-between items-center px-4 border-2  '>
                 
                 <Pages/>

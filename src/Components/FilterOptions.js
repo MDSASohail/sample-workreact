@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+
 import { useDispatch, useSelector } from 'react-redux';
 import {setFilterShow,setCategory,setExt,setShortBy,setReset} from '../Store/InternalSlice'
 function FilterOptions() {
@@ -28,7 +28,6 @@ function FilterOptions() {
                     <div className='flex justify-evenly'>
                         <button onClick={()=> dispatch(setExt("Income"))} className={`  rounded-2xl hover:bg-voilet100  hover:text-white py-1 px-4   ${ext==="Income"?"bg-voilet100 text-white":"bg-voilet20 text-voilet100"}`}>Income</button>
                         <button onClick={()=>dispatch(setExt("Expense"))}  className={` rounded-2xl hover:bg-voilet100  hover:text-white py-1 px-4   ${ext==="Expense"?"bg-voilet100 text-white":"bg-voilet20 text-voilet100"}`}>Expense</button>
-                        <button onClick={()=>dispatch(setExt("Transfer"))}  className={`  rounded-2xl hover:bg-voilet100  hover:text-white py-1 px-4  ${ext==="Transfer"?"bg-voilet100 text-white":"bg-voilet20 text-voilet100"}`}>Transfer</button>
                     </div>
                 </div>
                 <div className='my-2'>
@@ -44,14 +43,12 @@ function FilterOptions() {
                     <h1 className='font-medium '>Category</h1>
                     <div className='flex mt-4 justify-between'>
                         <h1>Choose Category</h1>
-                        <select value={category} onChange={(e)=>{dispatch(setCategory(e.target.value))}} className=' bg-voilet100  rounded-2xl    py-1 px-4  text-white outline-none' name="" id="">
+                        {ext==="Expense" && <select value={category} onChange={(e)=>{dispatch(setCategory(e.target.value))}} className=' bg-voilet100  rounded-2xl    py-1 px-4  text-white outline-none' name="" id="">
                             <option value="All">All</option>
                             <option value="Shopping">Shopping</option>
                             <option value="Food">Food</option>
                             <option value="Travel">Travel</option>
-                            <option value="Income">Income</option>
-                           
-                        </select>
+                        </select>}
                     </div>
                 </div>
                 {/* <div className='bg-voilet20  rounded-2xl hover:bg-voilet100 text-center text-xl font-bold hover:text-white py-1 px-4 cursor-pointer  text-voilet100'>

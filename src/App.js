@@ -34,7 +34,7 @@ function App() {
               try {
                   const fetchExpenses=async()=>{
                     const allExpenses=await axios.post('http://localhost:8000/expense/allExpense',{userId:user._id});
-                    console.log("All Expenses are",allExpenses.data);
+                    // console.log("All Expenses are",allExpenses.data);
                     dispatch(setAllExpences(allExpenses.data));
                   }
                   fetchExpenses();
